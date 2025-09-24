@@ -1,66 +1,22 @@
 export default {
-  title: 'Example/Button',
+  title: 'Todo List App/List',
   argTypes: {
-    backgroundColor: { control: 'color' },
-    label: { control: 'text' },
-    onClick: { action: 'clicked' },
-    primary: { control: 'boolean' },
-    size: {
-      control: { type: 'select' },
-      options: ['small', 'medium', 'large']
-    }
+    isActive: { control: 'boolean' },
+    text: { control: 'text' }
   }
 };
 
-const Template = ({ primary, backgroundColor, size, label, ...args }) => {
-  return createButton({ primary, backgroundColor, size, label, ...args });
-};
-
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  label: 'Button'
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button'
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button'
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button'
-};
-
-const createButton = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
-  label,
-  ...props
-}) => {
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.innerText = label;
-  btn.addEventListener('click', props.onClick);
-
-  const mode = primary
-    ? 'storybook-button--primary'
-    : 'storybook-button--secondary';
-  btn.className = ['storybook-button', `storybook-button--${size}`, mode].join(
+const Template = ({ isActive, text }) => {
+  const button = document.createElement('button');
+  button.className = ['todo-list-filter-button', isActive ? 'active' : ''].join(
     ' '
   );
+  button.textContent = text || 'Button';
+  return button;
+};
 
-  if (backgroundColor) {
-    btn.style.backgroundColor = backgroundColor;
-  }
-
-  return btn;
+export const Button = Template.bind({});
+Button.args = {
+  isActive: true,
+  text: 'All'
 };

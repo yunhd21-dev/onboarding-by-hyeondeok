@@ -1,16 +1,10 @@
-import './style.css';
-
-export function setupButton() {
-  const btn = document.getElementById('test-button');
-  const msg = document.getElementById('test-title');
-
-  if (btn && msg) {
-    btn.addEventListener('click', () => {
-      msg.textContent = 'Clicked';
-    });
-  }
-}
+import './styles.css';
+import TodoListApp from './todoListApp';
 
 (function () {
-  setupButton();
+  const appContainer = document.getElementById('app');
+  if (appContainer) {
+    const todoListApp = new TodoListApp(appContainer);
+    todoListApp.render();
+  }
 })();

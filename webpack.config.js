@@ -8,12 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html'
-    })
-  ],
   module: {
     rules: [
       {
@@ -21,5 +15,12 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      favicon: 'favicon.ico'
+    })
+  ]
 };
