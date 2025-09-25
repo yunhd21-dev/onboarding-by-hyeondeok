@@ -1,6 +1,8 @@
 /dist
-
 /node_modules
 
-
 *storybook.log
+
+# System Files
+.DS_Store
+Thumbs.db

@@ -63,10 +63,8 @@ describe('TodoService', () => {
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
-    const completedIdx = todoService.itemList.findIndex(
-      obj => obj.id === todoId
-    );
-    expect(todoService.itemList[completedIdx].selected).toBe(true);
+    const completedIdx = todoService.itemList.findIndex(obj => obj.selected);
+    expect(todoService.itemList[completedIdx].text).toBe('Test_3');
     expect(callback).toHaveBeenCalledWith(todoService.itemList);
 
     const activeList = todoService.getFilterList('active');
@@ -86,10 +84,8 @@ describe('TodoService', () => {
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
-    const completedIdx = todoService.itemList.findIndex(
-      obj => obj.id === todoId
-    );
-    expect(todoService.itemList[completedIdx].selected).toBe(true);
+    const completedIdx = todoService.itemList.findIndex(obj => obj.selected);
+    expect(todoService.itemList[completedIdx].text).toBe('Test_3');
     expect(callback).toHaveBeenCalledWith(todoService.itemList);
 
     const completedList = todoService.getFilterList('completed');
@@ -109,10 +105,8 @@ describe('TodoService', () => {
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
-    const completedIdx = todoService.itemList.findIndex(
-      obj => obj.id === todoId
-    );
-    expect(todoService.itemList[completedIdx].selected).toBe(true);
+    const completedIdx = todoService.itemList.findIndex(obj => obj.selected);
+    expect(todoService.itemList[completedIdx].text).toBe('Test_3');
     expect(callback).toHaveBeenCalledWith(todoService.itemList);
 
     const allList = todoService.getFilterList('all');
@@ -128,10 +122,8 @@ describe('TodoService', () => {
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
-    const completedIdx = todoService.itemList.findIndex(
-      obj => obj.id === todoId
-    );
-    expect(todoService.itemList[completedIdx].selected).toBe(true);
+    const completedIdx = todoService.itemList.findIndex(obj => obj.selected);
+    expect(todoService.itemList[completedIdx].text).toBe('Test_3');
     expect(callback).toHaveBeenCalledWith(todoService.itemList);
 
     expect(todoService.itemList.length).toBe(3);
