@@ -1,12 +1,15 @@
 import Button from './button';
 
 export default class StatusBar {
-  constructor({ onFilter, onClear }) {
-    this.selectedFilter = 'all';
-    this.allButton = null;
-    this.activeButton = null;
-    this.completedButton = null;
+  selectedFilter = 'all';
+  allButton = null;
+  activeButton = null;
+  completedButton = null;
+  container = null;
+  statusText = null;
+  completedText = null;
 
+  constructor({ onFilter, onClear }) {
     this.container = document.createElement('div');
     this.statusText = document.createElement('span');
     this.container.className = 'todo-list-status-section';
@@ -89,5 +92,9 @@ export default class StatusBar {
 
   rendor(parent) {
     parent.appendChild(this.container);
+  }
+
+  get element() {
+    return this.container;
   }
 }

@@ -1,10 +1,10 @@
 import './styles.css';
-import TodoListApp from './todoListApp';
+import TodoListApp from './todolistapp';
 
 (function () {
   const appContainer = document.getElementById('app');
   if (appContainer) {
-    const todoListApp = new TodoListApp(appContainer);
+    const todoListApp = new TodoListApp({ el: appContainer, useDnd: true });
     todoListApp.render();
   }
 })();

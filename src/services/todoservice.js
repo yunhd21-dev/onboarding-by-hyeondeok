@@ -6,7 +6,19 @@ export default class TodoService {
     this.index = 0;
   }
 
-  itemListSort(callback) {
+  itemIndexChange({ selectedIndex, targetIndex }) {
+    const [item] = this.itemList.splice(selectedIndex, 1);
+    this.itemList.splice(targetIndex, 0, item);
+    let index = 0;
+    this.itemList = this.itemList.map(obj => ({
+      ...obj,
+      id: Date.now() - index++
+    }));
+
+    return this.itemListSort();
+  }
+
+  itemListSort() {
     const activeList = this.itemList.filter(obj => !obj.selected);
     const completedList = this.itemList.filter(obj => obj.selected);
     activeList.sort((objA, objB) => {
@@ -14,7 +26,7 @@ export default class TodoService {
     });
     this.itemList = [...activeList, ...completedList];
 
-    if (callback) callback(this.itemList);
+    return this.itemList;
   }
 
   todoListRefresh(id, callback) {
@@ -27,14 +39,15 @@ export default class TodoService {
       this.itemList.push(obj);
     }
 
-    this.itemListSort(callback);
+    callback(this.itemListSort());
   }
 
-  addTodoList(value, callback) {
+  addTodoList(obj, callback) {
+    const { id, selected, text } = obj;
     const todoItem = {
-      id: Date.now() + this.index,
-      selected: false,
-      text: value,
+      id: id || Date.now() + this.index,
+      selected: selected || false,
+      text: text || '',
       onChange: id => {
         this.todoListRefresh(id, callback);
       }
@@ -42,7 +55,7 @@ export default class TodoService {
     this.todoList.push(todoItem);
     this.index++;
 
-    this.itemListSort(callback);
+    callback(this.itemListSort());
   }
 
   getFilterList(option) {
@@ -70,6 +83,14 @@ export default class TodoService {
     const activeList = this.itemList.filter(obj => !obj.selected);
     this.itemList = [...activeList];
     return this.getFilterList(this.selectedFilter);
+  }
+
+  set todoList(value) {
+    if (Array.isArray(value)) {
+      this.itemList = [...value];
+    } else {
+      this.itemList = [];
+    }
   }
 
   get todoList() {

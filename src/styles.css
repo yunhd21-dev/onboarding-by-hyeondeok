@@ -27,20 +27,26 @@
   font-size: 16px;
 }
 
+.todo-item-list-section {
+  width: 100%;
+  overflow: hidden;
+}
+
 .todo-item-list-section input[type='checkbox'] {
   cursor: pointer;
 }
 
 .todo-item-list-section .todo-list-ul {
   list-style-type: none;
+  user-select: none;
   padding: 0;
   margin: 0;
-  max-height: 250px;
-  overflow-y: auto;
+  width: 100%;
 }
 
 .todo-item-list-section .todo-list-ul li {
   display: flex;
+  width: 800px;
   justify-content: flex-start;
   align-items: center;
   padding: 10px;
@@ -49,6 +55,7 @@
 
 .todo-item-list-section .todo-list-ul li.empty {
   justify-content: center;
+  background-color: white;
   color: #888;
 }
 
@@ -86,4 +93,24 @@
 .todo-list-filter-button:hover,
 .todo-list-status-section button:hover {
   background-color: #f0f0f0;
+}
+
+li.drag-hover {
+  background-color: #ccc;
+}
+
+.drag-item li.top-selected {
+  border-top: 2px solid blue;
+  margin-top: -2px;
+}
+
+.drag-item li.bottom-selected {
+  border-bottom: 2px solid blue;
+}
+
+.drag-item li.drag-and-drop {
+  background-color: #ccc;
+  position: fixed;
+  pointer-events: none;
+  border: none;
 }

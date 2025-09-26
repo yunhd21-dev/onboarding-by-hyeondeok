@@ -1,4 +1,6 @@
 export default class Input {
+  container = null;
+  input = null;
   constructor({ onKeyPress }) {
     this.container = document.createElement('div');
     this.container.className = 'todo-list-input-section';
@@ -6,7 +8,7 @@ export default class Input {
     this.input.className = 'todo-list-input';
     this.input.placeholder = 'What needs to be done?';
     if (onKeyPress) {
-      this.input.addEventListener('keydown', evt => {
+      this.input.addEventListener('keyup', evt => {
         if (evt.key === 'Enter' && this.input.value.trim() !== '') {
           onKeyPress(this.input.value);
           this.input.value = '';
@@ -18,5 +20,9 @@ export default class Input {
   render(parent) {
     this.container.appendChild(this.input);
     parent.appendChild(this.container);
+  }
+
+  get element() {
+    return this.container;
   }
 }
