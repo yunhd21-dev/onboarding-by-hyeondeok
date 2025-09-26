@@ -1,6 +1,7 @@
-import Item from './item';
-
 export default class ItemList {
+  container = null;
+  ul = null;
+
   constructor() {
     this.container = document.createElement('div');
     this.ul = document.createElement('ul');
@@ -8,6 +9,8 @@ export default class ItemList {
     this.ul.className = 'todo-list-ul';
     this.ul.appendChild(this.emptyList());
     this.container.appendChild(this.ul);
+
+    this.selectItem = null;
   }
 
   emptyList() {
@@ -28,8 +31,7 @@ export default class ItemList {
     this.ul.replaceChildren();
     if (itemArr && Array.isArray(itemArr) && itemArr.length > 0) {
       itemArr.forEach(obj => {
-        const item = new Item(obj);
-        this.ul.appendChild(item.element);
+        this.ul.appendChild(obj);
       });
     } else {
       this.ul.appendChild(this.emptyList());
@@ -40,7 +42,7 @@ export default class ItemList {
     return this.container;
   }
 
-  get listElement() {
+  get ulElement() {
     return this.ul;
   }
 }

@@ -13,7 +13,7 @@ describe('TodoService', () => {
 
   test('addTodoList 메서드는 새로운 할 일을 추가해야 한다', () => {
     const callback = jest.fn();
-    todoService.addTodoList('Test', callback);
+    todoService.addTodoList({ text: 'Test' }, callback);
 
     expect(todoService.itemList.length).toBe(1);
     expect(todoService.itemList[0].text).toBe('Test');
@@ -23,7 +23,7 @@ describe('TodoService', () => {
 
   test('todoListRefresh 메서드는 할 일의 완료 상태를 토글해야 한다', () => {
     const callback = jest.fn();
-    todoService.addTodoList('Test', () => {});
+    todoService.addTodoList({ text: 'Test' }, () => {});
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
@@ -37,9 +37,9 @@ describe('TodoService', () => {
 
   test('itemListSort 메서드는 id 기준으로 할 일을 내림차순으로 재배열 해야한다.', () => {
     const callback = jest.fn();
-    todoService.addTodoList('Test_1', callback);
-    todoService.addTodoList('Test_2', callback);
-    todoService.addTodoList('Test_3', callback);
+    todoService.addTodoList({ text: 'Test_1' }, callback);
+    todoService.addTodoList({ text: 'Test_2' }, callback);
+    todoService.addTodoList({ text: 'Test_3' }, callback);
     const firstTodoId = todoService.itemList[0].id;
     const lastTodoId = todoService.itemList[2].id;
 
@@ -57,9 +57,9 @@ describe('TodoService', () => {
 
   test('필터 옵션이 Active 경우, getFilterList 메서드는 해야 할 일에 대한 리스트를 반환해야 한다.', () => {
     const callback = jest.fn();
-    todoService.addTodoList('Test_1', callback);
-    todoService.addTodoList('Test_2', callback);
-    todoService.addTodoList('Test_3', callback);
+    todoService.addTodoList({ text: 'Test_1' }, callback);
+    todoService.addTodoList({ text: 'Test_2' }, callback);
+    todoService.addTodoList({ text: 'Test_3' }, callback);
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
@@ -78,9 +78,9 @@ describe('TodoService', () => {
 
   test('필터 옵션이 Completed 경우, getFilterList 메서드는 완료된 할 일에 대한 리스트를 반환해야 한다.', () => {
     const callback = jest.fn();
-    todoService.addTodoList('Test_1', callback);
-    todoService.addTodoList('Test_2', callback);
-    todoService.addTodoList('Test_3', callback);
+    todoService.addTodoList({ text: 'Test_1' }, callback);
+    todoService.addTodoList({ text: 'Test_2' }, callback);
+    todoService.addTodoList({ text: 'Test_3' }, callback);
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
@@ -99,9 +99,9 @@ describe('TodoService', () => {
 
   test('필터 옵션이 All 경우, getFilterList 메서드는 모든 리스트를 반환해야 한다.', () => {
     const callback = jest.fn();
-    todoService.addTodoList('Test_1', callback);
-    todoService.addTodoList('Test_2', callback);
-    todoService.addTodoList('Test_3', callback);
+    todoService.addTodoList({ text: 'Test_1' }, callback);
+    todoService.addTodoList({ text: 'Test_2' }, callback);
+    todoService.addTodoList({ text: 'Test_3' }, callback);
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
@@ -116,9 +116,9 @@ describe('TodoService', () => {
 
   test('getClearCompletedList 메서드는 완료된 할 일을 제외한 리스트를 반환해야 한다.', () => {
     const callback = jest.fn();
-    todoService.addTodoList('Test_1', callback);
-    todoService.addTodoList('Test_2', callback);
-    todoService.addTodoList('Test_3', callback);
+    todoService.addTodoList({ text: 'Test_1' }, callback);
+    todoService.addTodoList({ text: 'Test_2' }, callback);
+    todoService.addTodoList({ text: 'Test_3' }, callback);
     const todoId = todoService.itemList[0].id;
 
     todoService.todoListRefresh(todoId, callback);
