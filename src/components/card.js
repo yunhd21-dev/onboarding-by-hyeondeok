@@ -1,5 +1,4 @@
 export default class Card {
-  card = null;
   constructor({ width, height, borderRadius }) {
     this.card = document.createElement('div');
     this.card.className = 'todo-list-card';

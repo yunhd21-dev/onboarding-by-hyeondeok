@@ -5,19 +5,25 @@ export default class DndService {
     this.dragItem = null;
     this.selectedIndex = -1;
     this.targetIndex = -1;
-    if (onMove) this.moveEvent = onMove;
+
+    if (onMove) {
+      this.moveEvent = onMove;
+    }
   }
 
   findDragAndDropElementIndex(element) {
     const listElement = this.dropZone.querySelectorAll('li');
     if (!listElement) return;
+
     const elementArr = [...listElement];
     const findIdx = elementArr.indexOf(element);
+
     return findIdx;
   }
 
   resetDropGuide() {
     const list = this.dropZone.querySelectorAll('li');
+
     if (list) {
       list.forEach(element => {
         element.classList.remove('top-selected');
@@ -28,8 +34,10 @@ export default class DndService {
 
   updateDropGuide(evt) {
     if (!(evt.target instanceof HTMLLIElement)) return;
+
     this.resetDropGuide();
     const isTopFocus = evt.offsetY < evt.target.offsetHeight / 2;
+
     if (isTopFocus) {
       evt.target.classList.add('top-selected');
       evt.target.classList.remove('bottom-selected');
@@ -41,6 +49,8 @@ export default class DndService {
 
   onDropCancel() {
     if (!this.dragItem) return;
+
+    this.resetDropGuide();
     this.dropZone.classList.remove('drag-item');
     this.dropZone.removeChild(this.dragItem);
     this.dragItem = null;
@@ -48,6 +58,7 @@ export default class DndService {
 
   onDropHandler(element) {
     const isBehind = this.dropZone.querySelector('li.top-selected') !== null;
+
     this.targetIndex = this.findDragAndDropElementIndex(element);
     this.resetDropGuide();
 
@@ -61,6 +72,7 @@ export default class DndService {
         : this.selectedIndex > this.targetIndex
           ? this.targetIndex + 1
           : this.targetIndex;
+
       this.moveEvent({
         selectedIndex: this.selectedIndex,
         targetIndex: moveIndex > 0 ? moveIndex : 0
@@ -73,9 +85,11 @@ export default class DndService {
       if (!(evt.target instanceof HTMLLIElement)) return;
       this.dragItem = evt.target.cloneNode(true);
       this.selectedIndex = this.findDragAndDropElementIndex(evt.target);
+
       this.dragItem.style.display = 'none';
       this.dragItem.classList.add('drag-and-drop');
       this.dropZone.classList.add('drag-item');
+
       this.dropZone.appendChild(this.dragItem);
     });
 
@@ -83,9 +97,11 @@ export default class DndService {
       if (!this.dragItem) return;
       const posX = evt.clientX;
       const posY = evt.clientY;
+
       this.dragItem.style.left = posX + 'px';
       this.dragItem.style.top = posY + 'px';
       this.dragItem.style.display = 'block';
+
       this.updateDropGuide(evt);
     });
 
@@ -100,6 +116,7 @@ export default class DndService {
 
   setDropZone(element) {
     if (!element) return;
+
     this.dropZone = element;
     this.dragAndDrop();
   }

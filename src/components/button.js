@@ -1,9 +1,10 @@
 export default class Button {
-  button = null;
   constructor({ isActive, text, onClick }) {
     this.button = document.createElement('button');
-    this.classNameUpdate(isActive);
     this.button.textContent = text || 'Button';
+
+    this.classNameUpdate(isActive);
+
     if (onClick) {
       this.button.addEventListener('click', onClick);
     }
