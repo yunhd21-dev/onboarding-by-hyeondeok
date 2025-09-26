@@ -99,6 +99,10 @@ li.drag-hover {
   background-color: #ccc;
 }
 
+li > span {
+  pointer-events: none;
+}
+
 .drag-item li.top-selected {
   border-top: 2px solid blue;
   margin-top: -2px;

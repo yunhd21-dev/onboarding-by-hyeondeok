@@ -1,16 +1,14 @@
 export default class ItemList {
-  container = null;
-  ul = null;
-
   constructor() {
+    this.selectItem = null;
     this.container = document.createElement('div');
     this.ul = document.createElement('ul');
+
     this.container.className = 'todo-item-list-section';
     this.ul.className = 'todo-list-ul';
+
     this.ul.appendChild(this.emptyList());
     this.container.appendChild(this.ul);
-
-    this.selectItem = null;
   }
 
   emptyList() {
@@ -18,6 +16,7 @@ export default class ItemList {
     const span = document.createElement('span');
     li.className = 'todo-list-li empty';
     span.textContent = 'No List';
+
     li.appendChild(span);
 
     return li;
@@ -29,6 +28,7 @@ export default class ItemList {
 
   listUpdate(itemArr) {
     this.ul.replaceChildren();
+
     if (itemArr && Array.isArray(itemArr) && itemArr.length > 0) {
       itemArr.forEach(obj => {
         this.ul.appendChild(obj);

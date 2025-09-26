@@ -1,22 +1,20 @@
 import Button from './button';
 
 export default class StatusBar {
-  selectedFilter = 'all';
-  allButton = null;
-  activeButton = null;
-  completedButton = null;
-  container = null;
-  statusText = null;
-  completedText = null;
-
   constructor({ onFilter, onClear }) {
+    this.selectedFilter = 'all';
+    this.allButton = null;
+    this.activeButton = null;
+    this.completedButton = null;
+
     this.container = document.createElement('div');
     this.statusText = document.createElement('span');
+    this.completedText = document.createElement('span');
+    const clearArea = document.createElement('div');
+
     this.container.className = 'todo-list-status-section';
     this.statusText.className = 'todo-list-status-text';
     this.statusText.textContent = '0 items left';
-
-    const clearArea = document.createElement('div');
     clearArea.className = 'todo-list-clear-area';
 
     const clearButton = new Button({
@@ -25,7 +23,6 @@ export default class StatusBar {
       onClick: onClear
     });
 
-    this.completedText = document.createElement('span');
     this.completedText.className = 'todo-list-completed-text';
     this.completedText.textContent = '(0)';
 
@@ -41,6 +38,7 @@ export default class StatusBar {
     this.allButton.classNameUpdate(this.selectedFilter === 'all');
     this.activeButton.classNameUpdate(this.selectedFilter === 'active');
     this.completedButton.classNameUpdate(this.selectedFilter === 'completed');
+
     callback(this.selectedFilter);
   }
 

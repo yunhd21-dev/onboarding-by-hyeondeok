@@ -19,6 +19,7 @@ export default class StorageService {
   getStorageData() {
     const getData = localStorage.getItem(this.keyValue);
     const jsonObj = this.parseJsonObject(getData);
+
     if (jsonObj) {
       return jsonObj;
     }

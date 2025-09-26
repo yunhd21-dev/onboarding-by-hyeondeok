@@ -7,9 +7,9 @@ export default class TodoListApp {
     this.itemList = null;
     this.statusBar = null;
     this.dnd = null;
+
     this.todoService = new TodoService();
     this.storageService = new StorageService('todo_list_app_data');
-
     this.card = new Card({
       width: '800px',
       height: 'auto',
@@ -24,6 +24,7 @@ export default class TodoListApp {
           this.todoListUpdate(resultList);
         }
       });
+
       document.addEventListener('keydown', evt => {
         if (evt.key === 'Escape') {
           this.dnd.onDropCancel();
@@ -34,6 +35,7 @@ export default class TodoListApp {
 
   initList() {
     const storageList = this.storageService.getStorageData();
+
     if (storageList) {
       storageList.forEach(obj => {
         this.addTodoListHandler(obj);
@@ -62,19 +64,23 @@ export default class TodoListApp {
 
   onClearCompleted() {
     const activeArr = this.todoService.getClearCompletedList();
+
     this.storageService.setStorageData(this.todoService.todoList);
     this.todoListUpdate(activeArr);
   }
 
   onFilterHander(option) {
     const filterList = this.todoService.getFilterList(option);
+
     this.todoListUpdate(filterList);
   }
 
   todoListUpdate(list) {
     let elementArr = [];
+
     list.forEach(obj => {
       const item = new Item(obj);
+
       elementArr.push(item.element);
     });
     this.itemList.listUpdate(elementArr);
@@ -83,9 +89,11 @@ export default class TodoListApp {
 
   createElement(callback) {
     this.itemList = new ItemList();
+
     if (this.dnd) {
       this.dnd.setDropZone(this.itemList.ulElement);
     }
+
     const input = new Input({
       onKeyPress: value => {
         this.addTodoListHandler({ text: value });
